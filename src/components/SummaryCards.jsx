@@ -1,38 +1,49 @@
-function SummaryCards(){
-    return(
-        <div className="summary-cards">
-            <div className="summary-card balance-card">
-                <h3>Total Balance</h3>
-                <h2>$25,000</h2>
-                <p>Available amount</p>
 
-            </div> 
+import React from "react";
 
-            <div className="summary-card income-card">
-                <h3>Total Income</h3>
-                <h2>$40,000</h2>
-                <p>Money Received</p>
-                
-            </div> 
+function SummaryCards({
+  totalIncome = 0,
+  totalExpenses = 0,
+  balance = 0,
+  savings = 0,
+}) {
+  const formatAmount = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2,
+    }).format(Number(amount) || 0);
+  };
 
-            
-            <div className="summary-card expense-card">
-                <h3>Total Expenses</h3>
-                <h2>$15,000</h2>
-                <p>Money spent</p>
-                
-            </div>
+  return (
+    <div className="summary-cards">
 
-               <div className="summary-card savings-card">
-                <h3>Savings</h3>
-                <h2>$25,000</h2>
-                <p>Remaining amount</p>
-                
-            </div>
+      <div className="summary-card balance-card">
+        <h3>Total Balance</h3>
+        <h2>{formatAmount(balance)}</h2>
+        <p>Available amount</p>
+      </div>
 
-        </div>
+      <div className="summary-card income-card">
+        <h3>Total Income</h3>
+        <h2>{formatAmount(totalIncome)}</h2>
+        <p>Money received</p>
+      </div>
 
-    )
+      <div className="summary-card expense-card">
+        <h3>Total Expenses</h3>
+        <h2>{formatAmount(totalExpenses)}</h2>
+        <p>Money spent</p>
+      </div>
+
+      <div className="summary-card savings-card">
+        <h3>Savings</h3>
+        <h2>{formatAmount(savings)}</h2>
+        <p>Remaining amount</p>
+      </div>
+
+    </div>
+  );
 }
 
 export default SummaryCards;
